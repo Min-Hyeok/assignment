@@ -67,21 +67,9 @@
         -webkit-line-clamp: 3;
     }
     &__favorite {
-        display: inline-block;
-        width: 30px;
-        height: 30px;
-        line-height: 20px;
-        border: none;
-        cursor: pointer;
-        border-radius: 50%;
-        outline: none;
         position: absolute;
         bottom: 0;
         right: 0;
-        &:hover {
-            background-color: $blue;
-            color: $white;
-        }
     }
     &__rank {
         position: absolute;

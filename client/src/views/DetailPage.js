@@ -29,12 +29,27 @@ export class DetailPage extends Component {
         this.setState({ content });
     }
 
+    componentDidUpdate() {
+        const shared = this.el.querySelector('.d_header_page_share_l');
+        const comment = this.el.querySelector('.comment_info');
+        const author = this.el.querySelector('.article_author');
+
+        comment && comment.remove();
+        shared && shared.remove();
+        author && author.remove();
+    }
+
     template() {
         const { content } = this.state;
         return `
-            ${content}
-            <div>
-                <a href="#!" class="list" onclick="history.back(); return false;">목록으로</a>
+            <div class="detail-page">
+                ${content}
+
+                ${content && `
+                    <div class="detail-page__prev">
+                        <button class="base-button" onclick="history.back(); return false;">목록으로</button>
+                    </div>
+                `}
             </div>
         `
     }

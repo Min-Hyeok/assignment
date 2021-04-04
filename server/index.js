@@ -39,8 +39,9 @@ const parseDetail = (() => {
             const { data } = await axios.get(url);
             const $ = cheerio.load(data);
             const content = $('.article_body').html();
+            const header = $('.article_header').html();
 
-            cache[url] = content;
+            cache[url] = header + content;
             fs.writeFileSync(path, content);
         }
         return cache[url];

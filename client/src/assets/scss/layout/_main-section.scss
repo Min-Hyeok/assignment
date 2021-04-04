@@ -1,9 +1,9 @@
 $interval: 30px;
 
 .main {
-    max-width: $base-max-width;
-    margin: 0 auto;
     &__section {
+        max-width: $base-max-width;
+        margin: 0 auto;
         & + & {
             padding-top: $interval;
             margin-top: $interval;

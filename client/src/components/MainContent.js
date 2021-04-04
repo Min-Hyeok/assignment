@@ -16,7 +16,7 @@ export class MainContent extends Component {
                                 <p class="base-card__media">${mediaName}</p>
                                 <p class="base-card__content">${summaryContent}</p>
                             </a>
-                            <button class="base-card__favorite favorite">★</button>
+                            <button class="base-card__favorite base-button base-button__icon favorite">★</button>
                         </article>
                     `).join('')}
                 </div>
@@ -25,6 +25,8 @@ export class MainContent extends Component {
     }
 
     eventInit () {
+        if (!this.el) return;
+
         this.el.addEventListener('click', (e) => {
             if (!e.target.classList.contains('favorite')) return;
             const { items, toggleFavorite } = this.props;

@@ -21,7 +21,7 @@ export class Component {
 
     render = () => {
         this.componentBeforeUpdate();
-        this.el.innerHTML = this.template();
+        if (this.el) this.el.innerHTML = this.template();
         this.componentDidUpdate();
     }
 

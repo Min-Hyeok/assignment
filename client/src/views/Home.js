@@ -53,7 +53,9 @@ export class Home extends Component {
 
     template () {
         return `
-            ${ this.state.loading ? '로딩 중입니다.' : `
+            ${ this.state.loading ? `
+                    <section class="main__section">로딩중입니다</section>
+                ` : `
                 <section id="life" class="main__section"></section>
                 <section id="food" class="main__section"></section>
                 <section id="trip" class="main__section"></section>
