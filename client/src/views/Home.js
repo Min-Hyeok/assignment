@@ -37,11 +37,13 @@ export class Home extends Component {
         const { toggleFavorite } = this;
         const { mainContents, bestContents } = this.state;
         const { life = [], food = [], trip = [], culture = [] } = mainContents;
+
         const $life = this.el.querySelector('#life');
         const $food = this.el.querySelector('#food');
         const $trip = this.el.querySelector('#trip');
         const $culture = this.el.querySelector('#culture');
         const $ranking = this.el.querySelector('#ranking');
+
         new MainContent($life, { items: life, title: '라이프', toggleFavorite });
         new MainContent($food, { items: food, title: '푸드', toggleFavorite });
         new MainContent($trip, { items: trip, title: '여행', toggleFavorite });
@@ -52,11 +54,11 @@ export class Home extends Component {
     template () {
         return `
             ${ this.state.loading ? '로딩 중입니다.' : '' }
-            <section id="life"></section>
-            <section id="food"></section>
-            <section id="trip"></section>
-            <section id="culture"></section>
-            <section id="ranking"></section>
+            <section id="life" class="main__section"></section>
+            <section id="food" class="main__section"></section>
+            <section id="trip" class="main__section"></section>
+            <section id="culture" class="main__section"></section>
+            <section id="ranking" class="main__section"></section>
         `
     }
 

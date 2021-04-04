@@ -1,0 +1,9 @@
+.main {
+    max-width: $base-max-width;
+    margin: 0 auto;
+    &__section {
+        & + & {
+            margin-top: 30px;
+        }
+    }
+}

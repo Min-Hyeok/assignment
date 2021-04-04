@@ -1,0 +1,60 @@
+.base-card {
+    &__category {
+        font-size: 20px;
+        margin-bottom: 20px;
+        color: $blue;
+    }
+    &__list {
+        display: flex;
+    }
+    &__item {
+        flex: 1;
+        margin: 0 10px;
+        padding-bottom: 40px;
+        position: relative;
+    }
+    &__title {
+        margin-top: 10px;
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 24px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: box;
+        overflow: hidden;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+    }
+    &__media {
+        font-size: 14px;
+        margin: 10px 0;
+    }
+    &__content {
+        font-size: 14px;
+        line-height: 16px;
+        color: $gray;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: box;
+        overflow: hidden;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+    }
+    &__favorite {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        line-height: 20px;
+        border: none;
+        cursor: pointer;
+        border-radius: 50%;
+        outline: none;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        &:hover {
+            background-color: $blue;
+            color: $white;
+        }
+    }
+}

@@ -5,19 +5,21 @@ export class MainContent extends Component {
     template () {
         const { items, title } = this.props;
         return `
-            <h2>${title}</h2>
-            <div>
-                ${items.map(({ idx, title, imageUrl, mediaName, url, summaryContent}) => `
-                    <article data-idx="${idx}">
-                        <a href="/#!/detail/${encodeURIComponent(url)}">
-                            <img src="${imageUrl}" alt="${title}" />
-                            <p>${title}</p>
-                            <p>${mediaName}</p>
-                            <p>${summaryContent}</p>
-                        </a>
-                        <button class="favorite">★</button>
-                    </article>
-                `).join('')}
+            <div class="base-card">
+                <h2 class="base-card__category">${title}</h2>
+                <div class="base-card__list">
+                    ${items.map(({ idx, title, imageUrl, mediaName, url, summaryContent}) => `
+                        <article class="base-card__item" data-idx="${idx}">
+                            <a href="/#!/detail/${encodeURIComponent(url)}">
+                                <img src="${imageUrl}" alt="${title}" />
+                                <p class="base-card__title">${title}</p>
+                                <p class="base-card__media">${mediaName}</p>
+                                <p class="base-card__content">${summaryContent}</p>
+                            </a>
+                            <button class="base-card__favorite favorite">★</button>
+                        </article>
+                    `).join('')}
+                </div>
             </div>
         `
     }

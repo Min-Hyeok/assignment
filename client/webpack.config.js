@@ -30,7 +30,15 @@ module.exports = {
             plugins: ['@babel/plugin-proposal-class-properties']
           }
         }
-      }
+      },
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          "style-loader",
+          "css-loader",
+          "sass-loader",
+        ],
+      },
     ]
   },
   plugins: [
@@ -43,6 +51,6 @@ module.exports = {
       '/api':  'http://localhost:3000',
     },
   },
-  devtool: 'source-map', // 개발 끝나면 지울거임
+  devtool: 'source-map',
   mode: 'development'
 }
