@@ -11,6 +11,7 @@ const Paths = {
     BEST: '/best',
     MAIN: '/main',
     DETAIL: '/detail',
+    INFO: '/content/info',
     [Category.LIFE]: '/content/life',
     [Category.TRIP]: '/content/trip',
     [Category.FOOD]: '/content/food',
@@ -59,6 +60,16 @@ export class HubService {
             return this.#client.get(`${Paths.DETAIL}/${encodeURIComponent(url)}`);
         } catch (e) { 
             console.info('상세페이지 컨텐츠를 가져오는 도중에 에러가 발생했습니다.');
+            console.info(e);
+            return null;
+        }
+    }
+
+    getContentInfo(idx) {
+        try {
+            return this.#client.get(`${Paths.INFO}/${idx}`);
+        } catch (e) {
+            console.info('컨텐츠의 상세정보를 가져오는 도중에 에러가 발생했습니다.');
             console.info(e);
             return null;
         }

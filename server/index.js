@@ -13,6 +13,20 @@ const Paths = {
     CULTURE: 'culture',
 }
 
+const getContentData = (() => {
+    const life = parseJSON(Paths.LIFE);
+    const food = parseJSON(Paths.FOOD);
+    const trip = parseJSON(Paths.TRIP);
+    const culture = parseJSON(Paths.CULTURE);
+
+    return {
+        life,
+        food,
+        trip,
+        culture
+    }
+});
+
 const parseJSON = (() => {
     const cache = {};
     return fileName => {
@@ -58,11 +72,24 @@ app.get('/api/content/:categoryID', (req, res) => {
     res.json(parseJSON(req.params.categoryID));
 });
 
+app.get('/api/content/info/:idx', async (req, res) => {
+    const { life, food, trip, culture } = getContentData();
+
+    const items = [].concat(
+        life,
+        food,
+        trip,
+        culture
+    );
+
+    const item = items.filter(v => v.idx === Number(req.params.idx))[0];
+
+    res.json(item);
+});
+
 app.get('/api/main', (req, res) => {
-    const life = parseJSON(Paths.LIFE);
-    const food = parseJSON(Paths.FOOD);
-    const trip = parseJSON(Paths.TRIP);
-    const culture = parseJSON(Paths.CULTURE);
+    const { life, food, trip, culture } = getContentData();
+
     res.json({
         life: life.slice(0, 4),
         food: food.slice(0, 4),

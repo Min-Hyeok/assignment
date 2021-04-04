@@ -7,6 +7,7 @@ export class DetailPage extends Component {
     stateInit () {
         return {
             content: '상세페이지 로딩 중입니다.',
+            items: []
         }
     }
 
@@ -24,9 +25,14 @@ export class DetailPage extends Component {
         }
 
         const url = paths.pop();
+        const idx = Number(decodeURIComponent(url).split('/').pop());
 
-        const content = await hubService.getDetailContent(url);
-        this.setState({ content });
+        const [ content, items ] = await Promise.all([
+            hubService.getDetailContent(url),
+            hubService.getContentInfo(idx)
+        ]);
+
+        this.setState({ content, items, idx });
     }
 
     componentDidUpdate() {
@@ -48,9 +54,28 @@ export class DetailPage extends Component {
                 ${content && `
                     <div class="detail-page__prev">
                         <button class="base-button" onclick="history.back(); return false;">목록으로</button>
+                        <button class="base-button base-button__icon favorite">★</button>
                     </div>
                 `}
             </div>
         `
+    }
+
+    eventInit () {
+        this.el.addEventListener('click', (e) => {
+            if (!e.target.classList.contains('favorite')) return;
+
+            const { items, idx } = this.state;
+            const favorites = [ ...store.state.favorites ];
+            const itemIndex = favorites.findIndex(v => v && v.idx === idx);
+
+            if (itemIndex === -1 && items) {
+                favorites.push(items);
+            } else {
+                favorites.splice(itemIndex, 1);
+            }
+
+            store.commit('SET_FAVORITES', favorites);
+        })
     }
 }
