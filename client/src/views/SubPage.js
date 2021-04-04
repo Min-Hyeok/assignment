@@ -39,13 +39,13 @@ export class SubPage extends Component {
     template() {
         const { items, title, loading } = this.state;
         return `
-            <section class="main__section">
+            <section class="base__section">
                 <div class="base-card">
                     <h2 class="base-card__category">${title}</h2>
                     ${ loading ? '로딩 중입니다.' : items.length === 0 ? '컨텐츠가 없습니다.' : '' }
                     <div class="base-card__list">
                         ${items.map(({ idx, title, imageUrl, mediaName, url, summaryContent}) => `
-                            <article class="base-card__item" data-idx="${idx}">
+                            <article class="base-card__item base-card__item--space-bottom" data-idx="${idx}">
                                 <a href="/#!/detail/${encodeURIComponent(url)}">
                                     <img src="${imageUrl}" alt="${title}" />
                                     <p class="base-card__title base-card__title--clamp base-card__title--bold">${title}</p>

@@ -54,13 +54,13 @@ export class Home extends Component {
     template () {
         return `
             ${ this.state.loading ? `
-                    <section class="main__section">로딩중입니다</section>
+                    <section class="base__section">로딩중입니다</section>
                 ` : `
-                <section id="life" class="main__section"></section>
-                <section id="food" class="main__section"></section>
-                <section id="trip" class="main__section"></section>
-                <section id="culture" class="main__section"></section>
-                <section id="ranking" class="main__section"></section>
+                <section id="life" class="base__section"></section>
+                <section id="food" class="base__section"></section>
+                <section id="trip" class="base__section"></section>
+                <section id="culture" class="base__section"></section>
+                <section id="ranking" class="base__section"></section>
             `}
         `
     }

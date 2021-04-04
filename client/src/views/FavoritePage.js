@@ -9,28 +9,34 @@ export class FavoritePage extends Component {
         console.log(favorites);
 
         return `
-            <h1>즐겨찾기 목록</h1>
-            <div>
-                ${reversed.map(({ idx, title, imageUrl, mediaName, url, summaryContent}) => `
-                    <article data-idx="${idx}">
-                        <a href="/#!/detail/${encodeURIComponent(url)}">
-                            <img src="${imageUrl}" alt="${title}" />
-                            <p>${title}</p>
-                            <p>${mediaName}</p>
-                            <p>${summaryContent}</p>
-                        </a>
-                        <button class="favorite-remove">★</button>
-                    </article>
-                `).join('')}
-            </div>
+            <section class="base__section">
+                <div class="base-card">
+                    <h2 class="base-card__category">즐겨찾기 목록</h2>
+                    <div class="base-card__list">
+                        ${reversed.map(({ idx, title, imageUrl, mediaName, url, summaryContent}) => `
+                            <article class="base-card__item base-card__item--space-bottom" data-idx="${idx}">
+                                <a href="/#!/detail/${encodeURIComponent(url)}">
+                                    <img src="${imageUrl}" alt="${title}" />
+                                    <p class="base-card__title base-card__title--clamp base-card__title--bold">${title}</p>
+                                    <p class="base-card__media">${mediaName}</p>
+                                    <p class="base-card__content">${summaryContent}</p>
+                                </a>
+                                <button class="base-card__favorite base-button base-button__icon favorite-remove">★</button>
+                            </article>
+                        `).join('')}
+                    </div>
+                </div>
+            </section>
         `
     }
 
     eventInit () {
         this.el.addEventListener('click', (e) => {
             if (!e.target.classList.contains('favorite-remove')) return;
+
             const favorites = [ ...store.state.favorites ];
             const idx = Number(e.target.closest('[data-idx]').dataset.idx);
+
             favorites.splice(favorites.findIndex(v => v.idx === idx), 1);
             store.commit('SET_FAVORITES', favorites);
         })
