@@ -2,8 +2,12 @@ import { Component } from "./_core";
 import { Home, SubPage, FavoritePage, DetailPage } from "./views";
 
 export class App extends Component {
+    removeEvent() {
+    }
 
     routing(el) {
+        this.removeEvent();
+
         const selectedPath = location.hash.replace('#!', '');
         const routes = {
             '/home': Home,

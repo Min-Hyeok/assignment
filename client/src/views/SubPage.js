@@ -17,6 +17,8 @@ export class SubPage extends Component {
             items: [],
             title: '',
             loading: true,
+            page: 1,
+            category: ''
         }
     }
 
@@ -32,8 +34,9 @@ export class SubPage extends Component {
             alert('존재하지 않는 페이지입니다.');
             history.back();
         }
-        const items = await hubService.getSubContents(category);
-        this.setState({ items, title: CategoryTitleMap[category], loading: false });
+
+        const { items, totalPage } = await hubService.getSubContents(category);
+        this.setState({ items, title: CategoryTitleMap[category], loading: false, totalPage, category: category });
     }
 
     template() {
@@ -59,6 +62,32 @@ export class SubPage extends Component {
                 </div>
             </section>
         `
+    }
+
+    componentDidUpdate() {
+        const category = location.hash.split('/').pop();
+
+        window.addEventListener('scroll', async (e) => {
+            const { totalPage, items, loading, page } = this.state;
+
+            if (loading || page > totalPage) return;
+            
+            const $baseCard = document.querySelector('.base-card');
+            const { pageYOffset, innerHeight } = window;
+            const windowOffsetBottom = pageYOffset + innerHeight;
+            const baseCardBottom = $baseCard.offsetHeight + $baseCard.offsetTop;
+
+            let nextItems = [];
+            
+            if (windowOffsetBottom + 100 >= baseCardBottom) {
+                this.setState({ loading: true })
+ 
+                const data = await hubService.getSubContents(category, page);
+                nextItems = items.concat(data.items);
+
+                this.setState({ items: nextItems, loading: false, page: page + 1 });
+            }
+        });
     }
 
     eventInit () {

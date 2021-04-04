@@ -31,6 +31,7 @@ export class Home extends Component {
             newFavorites.splice(itemIndex, 1);
         }
         store.commit('SET_FAVORITES', newFavorites);
+        alert(itemIndex === -1 ? '즐겨찾기에 추가되었습니다.' : '즐겨찾기에서 삭제되었습니다.'); 
     }
 
     async componentDidUpdate () {

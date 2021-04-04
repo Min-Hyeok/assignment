@@ -69,7 +69,17 @@ app.get('/api/best', (req, res) => {
 });
 
 app.get('/api/content/:categoryID', (req, res) => {
-    res.json(parseJSON(req.params.categoryID));
+    const data = Array.from(parseJSON(req.params.categoryID));
+    const totalPage = (data.length - 12) / 4;
+    let { page } = req.query;
+
+    const items = !page ? data.splice(0, 12) : data.splice(12 + (Number(page - 1) * 4), 4);
+
+    res.json({
+        items,
+        totalPage
+    });
+
 });
 
 app.get('/api/content/info/:idx', async (req, res) => {

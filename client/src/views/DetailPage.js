@@ -36,13 +36,13 @@ export class DetailPage extends Component {
     }
 
     componentDidUpdate() {
-        const shared = this.el.querySelector('.d_header_page_share_l');
-        const comment = this.el.querySelector('.comment_info');
-        const author = this.el.querySelector('.article_author');
+        const exceptionList = ['.d_header_page_share_l', '.comment_info', '.article_author', '.article_tag', '.d_article_share'];
 
-        comment && comment.remove();
-        shared && shared.remove();
-        author && author.remove();
+        exceptionList.forEach(v => {
+            const el = this.el.querySelector(v);
+
+            el && el.remove();
+        });
     }
 
     template() {

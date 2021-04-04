@@ -6,7 +6,6 @@ export class FavoritePage extends Component {
     template () {
         const { favorites } = store.state;
         const reversed = [ ...favorites ].reverse();
-        console.log(favorites);
 
         return `
             <section class="base__section">
@@ -39,6 +38,7 @@ export class FavoritePage extends Component {
 
             favorites.splice(favorites.findIndex(v => v.idx === idx), 1);
             store.commit('SET_FAVORITES', favorites);
+            alert('즐겨찾기에서 삭제되었습니다.');
         })
     }
 
