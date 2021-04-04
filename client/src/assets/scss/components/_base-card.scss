@@ -6,24 +6,50 @@
     }
     &__list {
         display: flex;
+        flex-wrap: wrap;
     }
     &__item {
-        flex: 1;
-        margin: 0 10px;
+        max-width: 25%;
+        box-sizing: border-box;
+        padding: 0 10px;
         padding-bottom: 40px;
         position: relative;
+        &--ranking {
+            padding: 20px 10px 10px 40px;
+            height: 140px;
+            background-color: $light-gray;
+            border-right: 1px solid $white;
+            border-bottom: 1px solid $white;
+            &:hover {
+                background-color: $blue;
+                color: $white;
+                & .base-card__rank {
+                    color: inherit;
+                }
+            }
+        }
+        img {
+            width: 100%;
+        }
     }
     &__title {
         margin-top: 10px;
-        font-weight: bold;
         font-size: 18px;
         line-height: 24px;
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: box;
-        overflow: hidden;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
+        &--small {
+            font-size: 15px;
+        }
+        &--bold {
+            font-weight: bold;
+        }
+        &--clamp {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: box;
+            overflow: hidden;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+        }
     }
     &__media {
         font-size: 14px;
@@ -56,5 +82,12 @@
             background-color: $blue;
             color: $white;
         }
+    }
+    &__rank {
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        font-size: 24px;
+        color: $blue;
     }
 }

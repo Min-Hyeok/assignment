@@ -48,7 +48,9 @@ export class App extends Component {
             </header>
             <main id="main" class="main"></main>
             <footer class="footer">
-                Copyright &copy; 2021 김민혁 All Right Reserved
+                <div class="footer__content">
+                    Copyright &copy; 2021 김민혁 All Right Reserved
+                </div>
             </footer>
         `
     }

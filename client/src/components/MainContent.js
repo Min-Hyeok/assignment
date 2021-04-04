@@ -12,7 +12,7 @@ export class MainContent extends Component {
                         <article class="base-card__item" data-idx="${idx}">
                             <a href="/#!/detail/${encodeURIComponent(url)}">
                                 <img src="${imageUrl}" alt="${title}" />
-                                <p class="base-card__title">${title}</p>
+                                <p class="base-card__title base-card__title--clamp base-card__title--bold">${title}</p>
                                 <p class="base-card__media">${mediaName}</p>
                                 <p class="base-card__content">${summaryContent}</p>
                             </a>

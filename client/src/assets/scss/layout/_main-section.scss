@@ -1,9 +1,13 @@
+$interval: 30px;
+
 .main {
     max-width: $base-max-width;
     margin: 0 auto;
     &__section {
         & + & {
-            margin-top: 30px;
+            padding-top: $interval;
+            margin-top: $interval;
+            border-top: 1px solid $light-gray;
         }
     }
 }

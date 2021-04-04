@@ -1,0 +1,13 @@
+$interval: 30px;
+
+.footer {
+    border-top: 1px solid $light-gray;
+    margin-top: $interval;
+    padding-top: $interval;
+    padding-bottom: $interval;
+    &__content {
+        max-width: $base-max-width;
+        margin: 0 auto;
+        text-align: center;
+    }
+}
