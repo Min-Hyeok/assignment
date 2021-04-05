@@ -47,7 +47,7 @@ export class HubService {
 
     getSubContents(category, page) {
         try {
-            return this.#client.get(Paths[category] + `${page ? `?page=${page}` : ``}`);
+            return this.#client.get(Paths[category]);
         } catch (e) { 
             console.info('서브페이지 컨텐츠를 가져오는 도중에 에러가 발생했습니다.');
             console.info(e);

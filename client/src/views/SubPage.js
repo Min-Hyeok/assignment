@@ -36,8 +36,8 @@ export class SubPage extends Component {
             history.back();
         }
 
-        const { items, totalPage } = await hubService.getSubContents(category);
-        this.setState({ items, title: CategoryTitleMap[category], loading: false, totalPage, category: category });
+        const items = await hubService.getSubContents(category);
+        this.setState({ items, title: CategoryTitleMap[category], loading: false, category: category });
     }
 
     template() {
@@ -70,30 +70,6 @@ export class SubPage extends Component {
     }
 
     eventInit () {
-        const category = location.hash.split('/').pop();
-
-        window.addEventListener('scroll', async (e) => {
-            const { totalPage, items, loading, page } = this.state;
-            const $baseCard = document.querySelector('.base-card');
-
-            if (loading || page > totalPage || !$baseCard) return;
-
-            const { pageYOffset, innerHeight } = window;
-            const windowOffsetBottom = pageYOffset + innerHeight;
-            const baseCardBottom = $baseCard.offsetHeight + $baseCard.offsetTop;
-
-            let nextItems = [];
-
-            if (windowOffsetBottom >= baseCardBottom) {
-                this.setState({ loading: true })
- 
-                const data = await hubService.getSubContents(category, page);
-                nextItems = items.concat(data.items);
-
-                this.setState({ items: nextItems, loading: false, page: page + 1 });
-            }
-        });
-
         this.el.addEventListener('click', (e) => {
             if (!e.target.classList.contains('favorite-toggle')) return;
             const favorites = [ ...store.state.favorites ];
