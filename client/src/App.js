@@ -3,6 +3,7 @@ import { Home, SubPage, FavoritePage, DetailPage } from "./views";
 
 export class App extends Component {
     removeEvent() {
+        window.removeEventListener('scroll', () => {});
     }
 
     routing(el) {

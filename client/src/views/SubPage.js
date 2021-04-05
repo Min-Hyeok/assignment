@@ -30,6 +30,7 @@ export class SubPage extends Component {
         }
 
         const category = paths.pop();
+
         if (!Object.values(Category).includes(category)) {
             alert('존재하지 않는 페이지입니다.');
             history.back();
@@ -45,7 +46,11 @@ export class SubPage extends Component {
             <section class="base__section">
                 <div class="base-card">
                     <h2 class="base-card__category">${title}</h2>
-                    ${ loading ? '로딩 중입니다.' : items.length === 0 ? '컨텐츠가 없습니다.' : '' }
+                    ${ loading ? `
+                        <div class="loader-container">
+                            <div class="loader">Loading...</div>
+                        </div>
+                    ` : items.length === 0 ? '컨텐츠가 없습니다.' : '' }
                     <div class="base-card__list">
                         ${items.map(({ idx, title, imageUrl, mediaName, url, summaryContent}) => `
                             <article class="base-card__item base-card__item--space-bottom" data-idx="${idx}">
@@ -71,14 +76,14 @@ export class SubPage extends Component {
             const { totalPage, items, loading, page } = this.state;
 
             if (loading || page > totalPage) return;
-            
+
             const $baseCard = document.querySelector('.base-card');
             const { pageYOffset, innerHeight } = window;
             const windowOffsetBottom = pageYOffset + innerHeight;
             const baseCardBottom = $baseCard.offsetHeight + $baseCard.offsetTop;
 
             let nextItems = [];
-            
+
             if (windowOffsetBottom + 100 >= baseCardBottom) {
                 this.setState({ loading: true })
  

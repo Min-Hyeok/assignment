@@ -6,7 +6,8 @@ export class DetailPage extends Component {
 
     stateInit () {
         return {
-            content: '상세페이지 로딩 중입니다.',
+            content: '',
+            loading: true,
             items: []
         }
     }
@@ -32,7 +33,7 @@ export class DetailPage extends Component {
             hubService.getContentInfo(idx)
         ]);
 
-        this.setState({ content, items, idx });
+        this.setState({ content, items, idx, loading: false });
     }
 
     componentDidUpdate() {
@@ -46,10 +47,14 @@ export class DetailPage extends Component {
     }
 
     template() {
-        const { content } = this.state;
+        const { content, loading } = this.state;
         return `
             <div class="detail-page">
-                ${content}
+                ${loading ? `
+                    <div class="loader-container">
+                        <div class="loader">Loading...</div>
+                    </div>
+                ` : content}
 
                 ${content && `
                     <div class="detail-page__prev">
