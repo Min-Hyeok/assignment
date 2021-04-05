@@ -60,7 +60,7 @@ export class SubPage extends Component {
                                     <p class="base-card__media">${mediaName}</p>
                                     <p class="base-card__content">${summaryContent}</p>
                                 </a>
-                                <button class="base-card__favorite base-button base-button__icon favorite">★</button>
+                                <button class="base-card__favorite base-button base-button__icon favorite-toggle">★</button>
                             </article>
                         `).join('')}
                     </div>
@@ -69,22 +69,22 @@ export class SubPage extends Component {
         `
     }
 
-    componentDidUpdate() {
+    eventInit () {
         const category = location.hash.split('/').pop();
 
         window.addEventListener('scroll', async (e) => {
             const { totalPage, items, loading, page } = this.state;
-
-            if (loading || page > totalPage) return;
-
             const $baseCard = document.querySelector('.base-card');
+
+            if (loading || page > totalPage || !$baseCard) return;
+
             const { pageYOffset, innerHeight } = window;
             const windowOffsetBottom = pageYOffset + innerHeight;
             const baseCardBottom = $baseCard.offsetHeight + $baseCard.offsetTop;
 
             let nextItems = [];
 
-            if (windowOffsetBottom + 100 >= baseCardBottom) {
+            if (windowOffsetBottom >= baseCardBottom) {
                 this.setState({ loading: true })
  
                 const data = await hubService.getSubContents(category, page);
@@ -93,9 +93,7 @@ export class SubPage extends Component {
                 this.setState({ items: nextItems, loading: false, page: page + 1 });
             }
         });
-    }
 
-    eventInit () {
         this.el.addEventListener('click', (e) => {
             if (!e.target.classList.contains('favorite-toggle')) return;
             const favorites = [ ...store.state.favorites ];
@@ -107,6 +105,9 @@ export class SubPage extends Component {
             } else {
                 favorites.splice(itemIndex, 1);
             }
+        
+            alert(itemIndex === -1 && item ? '즐겨찾기에 추가되었습니다.' : '즐겨찾기에서 삭제되었습니다.');
+
             store.commit('SET_FAVORITES', favorites);
         })
     }

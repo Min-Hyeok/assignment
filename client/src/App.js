@@ -3,12 +3,14 @@ import { Home, SubPage, FavoritePage, DetailPage } from "./views";
 
 export class App extends Component {
     removeEvent() {
-        window.removeEventListener('scroll', () => {});
+        window.removeEventListener('scroll', () => {
+            console.log('test')
+        }, true);
     }
 
     routing(el) {
         this.removeEvent();
-
+        
         const selectedPath = location.hash.replace('#!', '');
         const routes = {
             '/home': Home,
@@ -24,6 +26,7 @@ export class App extends Component {
             }
         }
         new selectedRoute(el);
+
     }
 
     componentDidMounted() {
