@@ -33,11 +33,12 @@ export class FavoritePage extends Component {
         this.el.addEventListener('click', (e) => {
             if (!e.target.classList.contains('favorite-remove')) return;
 
-            const favorites = [ ...store.state.favorites ];
+            const favorites = Array.from([ ...store.state.favorites ]);
             const idx = Number(e.target.closest('[data-idx]').dataset.idx);
 
             favorites.splice(favorites.findIndex(v => v.idx === idx), 1);
             store.commit('SET_FAVORITES', favorites);
+
             alert('즐겨찾기에서 삭제되었습니다.');
         })
     }

@@ -26,7 +26,6 @@ const getContentData = (() => {
 
 const parseJSON = (() => {
     const cache = {};
-    console.log(cache)
     return fileName => {
         if (cache[fileName]) {
             return cache[fileName];

@@ -71,13 +71,15 @@ export class DetailPage extends Component {
             if (!e.target.classList.contains('favorite')) return;
 
             const { items, idx } = this.state;
-            const favorites = [ ...store.state.favorites ];
+            const favorites = Array.from([ ...store.state.favorites ]);
             const itemIndex = favorites.findIndex(v => v && v.idx === idx);
 
             if (itemIndex === -1 && items) {
                 favorites.push(items);
+                alert('즐겨찾기에 추가되었습니다.');
             } else {
                 favorites.splice(itemIndex, 1);
+                alert('즐겨찾기에서 삭제되었습니다.');
             }
 
             store.commit('SET_FAVORITES', favorites);

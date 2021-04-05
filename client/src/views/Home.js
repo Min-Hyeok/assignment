@@ -23,7 +23,7 @@ export class Home extends Component {
     }
 
     toggleFavorite = (item) => {
-        const newFavorites = [ ...store.state.favorites ];
+        const newFavorites = Array.from([ ...store.state.favorites ]);
         const itemIndex = newFavorites.findIndex(v => v.idx === item.idx);
         if (itemIndex === -1) {
             newFavorites.push(item);

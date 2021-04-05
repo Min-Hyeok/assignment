@@ -9,7 +9,6 @@ export const store = new Store({
     mutations: {
         SET_FAVORITES (state, payload) {
             state.favorites = payload;
-            console.log(payload);
             favoriteRepository.set(payload);
         }
     },

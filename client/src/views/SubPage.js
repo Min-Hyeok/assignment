@@ -72,17 +72,18 @@ export class SubPage extends Component {
     eventInit () {
         this.el.addEventListener('click', (e) => {
             if (!e.target.classList.contains('favorite-toggle')) return;
-            const favorites = [ ...store.state.favorites ];
+            const favorites = Array.from([ ...store.state.favorites ]);
             const idx = Number(e.target.closest('[data-idx]').dataset.idx);
             const itemIndex = favorites.findIndex(v => v && v.idx === idx);
             const item = this.state.items.find(v => v.idx === idx);
+
             if (itemIndex === -1 && item) {
                 favorites.push(item);
+                alert('즐겨찾기에 추가되었습니다.');
             } else {
                 favorites.splice(itemIndex, 1);
+                alert('즐겨찾기에서 삭제되었습니다.');
             }
-        
-            alert(itemIndex === -1 && item ? '즐겨찾기에 추가되었습니다.' : '즐겨찾기에서 삭제되었습니다.');
 
             store.commit('SET_FAVORITES', favorites);
         })
