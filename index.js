@@ -5,6 +5,6 @@ app.use(express.static('dist'));
 
 require('./src/router/hub.router.js')(app);
 
-app.listen(3000, () => {
-    console.log('http://localhost:3000');
+app.listen(443, () => {
+    console.log('http://localhost:443');
 });
